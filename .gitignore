@@ -7,3 +7,7 @@
 .Spotlight-V100
 .Trashes
 .fseventsd
+
+# JavaScript / TypeScript
+node_modules/
+dist/
