@@ -1,0 +1,16 @@
+{
+  "name": "strat-game-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "host": "vite --host 0.0.0.0 --strictPort",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4",
+    "vite": "^8.1.0"
+  }
+}
