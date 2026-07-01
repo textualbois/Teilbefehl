@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package strat_game.common_definitions;
+
+message ColorDefinition {
+  string name = 1;
+  string hex = 2;
+}
+
+message ColorIndex {
+  map<string, ColorDefinition> colors = 1;
+}

@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package strat_game.common_definitions;
+
+message BaseLayerDefinition {
+  string id = 1;
+  string name = 2;
+  string color_id = 3;
+  bool passable = 4;
+  optional uint32 movement_cost = 5;
+  string notes = 6;
+}
+
+message BaseLayerIndex {
+  repeated string base_layers = 1;
+}
+
+message TileGenerationIndex {
+  repeated string tile_generation_definitions = 1;
+}
+
+message BaseLayerTransitionProbabilities {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  map<string, BaseLayerTransitionRow> probabilities = 4;
+}
+
+message BaseLayerTransitionRow {
+  map<string, double> probabilities = 1;
+}

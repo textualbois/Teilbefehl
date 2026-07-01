@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package strat_game.common_definitions;
+
+message CommonOrder {
+  string id = 1;
+  string name = 2;
+  CommonOrderProperties properties = 3;
+  CommonOrderNotes notes = 4;
+}
+
+message CommonOrderProperties {
+  optional uint64 time_issued = 1;
+  optional uint64 time_received = 2;
+  string relay_officer = 3;
+  optional uint64 duration = 4;
+  optional uint64 return_by = 5;
+  repeated string target_units = 6;
+}
+
+message CommonOrderNotes {
+  string time_issued = 1;
+  string time_received = 2;
+  string relay_officer = 3;
+  string duration = 4;
+  string return_by = 5;
+  string target_units = 6;
+}
+
+message OrderDefinition {
+  string id = 1;
+  string alias = 2;
+  string name = 3;
+  string extends = 4;
+  OrderProperties properties = 5;
+}
+
+message OrderProperties {
+  string area = 1;
+  string location = 2;
+  repeated string route = 3;
+  string target_area = 4;
+  repeated string target_enemy_units = 5;
+  string building_type = 6;
+  string build_location = 7;
+  string order_to_relay = 8;
+  repeated string relay_target_units = 9;
+}
+
+message OrderIndex {
+  string common_order = 1;
+  repeated string orders = 2;
+}

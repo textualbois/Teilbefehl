@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package strat_game.common_definitions;
+
+import "common_definitions/common.proto";
+
+message TileDefinition {
+  string id = 1;
+  string name = 2;
+  TileProperties properties = 3;
+  TileNotes notes = 4;
+}
+
+message TileProperties {
+  Coordinates coordinates = 1;
+  string base_layer_id = 2;
+  optional double depth = 3;
+}
+
+message TileNotes {
+  string coordinates = 1;
+  string base_layer_id = 2;
+  string depth = 3;
+}

@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package strat_game.common_definitions;
+
+message Coordinates {
+  int32 x = 1;
+  int32 y = 2;
+  int32 z = 3;
+}

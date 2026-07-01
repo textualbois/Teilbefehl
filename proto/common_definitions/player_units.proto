@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package strat_game.common_definitions;
+
+message PlayerUnitDefinition {
+  string id = 1;
+  string name = 2;
+  string unit_type = 3;
+  uint32 hp = 4;
+  uint32 movement = 5;
+  uint32 attack = 6;
+  int32 observe_modifier = 7;
+  double fatigue_modifier = 8;
+}
+
+message PlayerUnitIndex {
+  repeated string player_units = 1;
+}
