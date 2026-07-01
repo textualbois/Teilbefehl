@@ -1,0 +1,9 @@
+{
+  "id": "relay",
+  "name": "Relay",
+  "extends": "common_order",
+  "properties": {
+    "orderToRelay": null,
+    "relayTargetUnits": []
+  }
+}

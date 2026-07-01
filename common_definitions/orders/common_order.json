@@ -1,0 +1,20 @@
+{
+  "id": "common_order",
+  "name": "Common Order",
+  "properties": {
+    "timeIssued": null,
+    "timeReceived": null,
+    "relayOfficer": null,
+    "duration": null,
+    "returnBy": null,
+    "targetUnits": []
+  },
+  "notes": {
+    "timeIssued": "When the order was created.",
+    "timeReceived": "When the target unit or relay officer received the order.",
+    "relayOfficer": "Unit or officer responsible for passing the order along.",
+    "duration": "How long the order should run, measured in game time units.",
+    "returnBy": "Deadline for the order to finish or for units to return. Use instead of duration when needed.",
+    "targetUnits": "Units expected to execute this order."
+  }
+}

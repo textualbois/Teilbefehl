@@ -1,0 +1,8 @@
+{
+  "id": "scout",
+  "name": "Scout",
+  "extends": "common_order",
+  "properties": {
+    "area": null
+  }
+}

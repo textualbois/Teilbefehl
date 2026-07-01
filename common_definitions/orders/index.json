@@ -1,0 +1,11 @@
+{
+  "commonOrder": "common_order.json",
+  "orders": [
+    "scout.json",
+    "observe.json",
+    "patrol.json",
+    "seek_and_destroy.json",
+    "build.json",
+    "relay.json"
+  ]
+}

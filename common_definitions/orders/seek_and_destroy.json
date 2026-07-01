@@ -1,0 +1,10 @@
+{
+  "id": "seek_and_destroy",
+  "alias": "sad",
+  "name": "Seek And Destroy",
+  "extends": "common_order",
+  "properties": {
+    "targetArea": null,
+    "targetEnemyUnits": []
+  }
+}

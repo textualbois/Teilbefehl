@@ -1,0 +1,8 @@
+{
+  "id": "patrol",
+  "name": "Patrol",
+  "extends": "common_order",
+  "properties": {
+    "route": []
+  }
+}

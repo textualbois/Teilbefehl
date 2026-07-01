@@ -1,0 +1,9 @@
+{
+  "id": "build",
+  "name": "Build",
+  "extends": "common_order",
+  "properties": {
+    "buildingType": null,
+    "buildLocation": null
+  }
+}
