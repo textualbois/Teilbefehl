@@ -1,0 +1,10 @@
+{
+  "id": "villager",
+  "name": "Villager",
+  "unitType": "villager",
+  "hp": 50,
+  "movement": 3,
+  "attack": 2,
+  "observeModifier": 0,
+  "fatigueModifier": 1
+}

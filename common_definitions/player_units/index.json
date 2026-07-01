@@ -1,0 +1,9 @@
+{
+  "playerUnits": [
+    "villager.json",
+    "scout.json",
+    "melee_soldier.json",
+    "hunter.json",
+    "ranged_soldier.json"
+  ]
+}

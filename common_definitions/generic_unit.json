@@ -1,0 +1,14 @@
+{
+  "id": "generic_unit",
+  "name": "Generic Unit",
+  "properties": {
+    "unitType": null,
+    "team": null,
+    "coordinates": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "fatigue": 0
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "id": "melee_soldier",
+  "name": "Melee Soldier",
+  "unitType": "melee_soldier",
+  "hp": 120,
+  "movement": 3,
+  "attack": 12,
+  "observeModifier": 0,
+  "fatigueModifier": 1.2
+}

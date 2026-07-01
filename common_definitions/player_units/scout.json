@@ -1,0 +1,10 @@
+{
+  "id": "scout",
+  "name": "Scout",
+  "unitType": "scout",
+  "hp": 70,
+  "movement": 5,
+  "attack": 4,
+  "observeModifier": 2,
+  "fatigueModifier": 0.8
+}

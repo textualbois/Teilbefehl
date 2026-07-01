@@ -1,0 +1,10 @@
+{
+  "id": "hunter",
+  "name": "Hunter",
+  "unitType": "hunter",
+  "hp": 80,
+  "movement": 4,
+  "attack": 8,
+  "observeModifier": 1,
+  "fatigueModifier": 0.9
+}

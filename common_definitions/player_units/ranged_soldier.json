@@ -1,0 +1,10 @@
+{
+  "id": "ranged_soldier",
+  "name": "Ranged Soldier",
+  "unitType": "ranged_soldier",
+  "hp": 90,
+  "movement": 3,
+  "attack": 10,
+  "observeModifier": 0,
+  "fatigueModifier": 1
+}
