@@ -1,0 +1,7 @@
+{
+  "id": "training_ground",
+  "name": "Training Ground",
+  "hp": 400,
+  "timeToBuild": 4,
+  "observeModifier": 0
+}

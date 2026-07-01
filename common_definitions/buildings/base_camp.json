@@ -1,0 +1,7 @@
+{
+  "id": "base_camp",
+  "name": "Base Camp",
+  "hp": 500,
+  "timeToBuild": 5,
+  "observeModifier": 0
+}

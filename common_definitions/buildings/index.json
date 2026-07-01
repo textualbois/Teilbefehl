@@ -1,0 +1,13 @@
+{
+  "buildings": [
+    "base_camp.json",
+    "watch_tower.json",
+    "castle.json",
+    "training_ground.json",
+    "armory.json",
+    "stable.json",
+    "townhall.json",
+    "fort.json",
+    "signal_tower.json"
+  ]
+}

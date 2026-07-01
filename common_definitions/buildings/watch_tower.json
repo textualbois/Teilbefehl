@@ -1,0 +1,7 @@
+{
+  "id": "watch_tower",
+  "name": "Watch Tower",
+  "hp": 300,
+  "timeToBuild": 3,
+  "observeModifier": 1
+}

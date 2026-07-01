@@ -1,0 +1,7 @@
+{
+  "id": "stable",
+  "name": "Stable",
+  "hp": 350,
+  "timeToBuild": 4,
+  "observeModifier": 0
+}
