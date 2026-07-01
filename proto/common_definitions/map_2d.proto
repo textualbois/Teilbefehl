@@ -13,12 +13,22 @@ message TileDefinition {
 
 message TileProperties {
   Coordinates coordinates = 1;
-  string base_layer_id = 2;
+  TerrainType terrain_type = 2;
   optional double depth = 3;
 }
 
 message TileNotes {
   string coordinates = 1;
-  string base_layer_id = 2;
+  string terrain_type = 2;
   string depth = 3;
+}
+
+message Area {
+  Coordinates center = 1;
+  uint32 radius = 2;
+}
+
+message Route {
+  Coordinates start = 1;
+  repeated Coordinates waypoints = 2;
 }

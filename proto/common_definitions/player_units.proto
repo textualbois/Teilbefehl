@@ -2,10 +2,12 @@ syntax = "proto3";
 
 package strat_game.common_definitions;
 
+import "common_definitions/common.proto";
+
 message PlayerUnitDefinition {
   string id = 1;
   string name = 2;
-  string unit_type = 3;
+  UnitType unit_type = 3;
   uint32 hp = 4;
   uint32 movement = 5;
   uint32 attack = 6;

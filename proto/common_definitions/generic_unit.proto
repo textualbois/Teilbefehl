@@ -5,13 +5,13 @@ package strat_game.common_definitions;
 import "common_definitions/common.proto";
 
 message GenericUnit {
-  string id = 1;
+  UnitId id = 1;
   string name = 2;
   GenericUnitProperties properties = 3;
 }
 
 message GenericUnitProperties {
-  string unit_type = 1;
+  UnitType unit_type = 1;
   string team = 2;
   Coordinates coordinates = 3;
   double fatigue = 4;

@@ -2,8 +2,10 @@ syntax = "proto3";
 
 package strat_game.common_definitions;
 
+import "common_definitions/common.proto";
+
 message BuildingDefinition {
-  string id = 1;
+  BuildingType building_type = 1;
   string name = 2;
   uint32 hp = 3;
   uint32 time_to_build = 4;
@@ -11,5 +13,5 @@ message BuildingDefinition {
 }
 
 message BuildingIndex {
-  repeated string buildings = 1;
+  repeated BuildingType buildings = 1;
 }

@@ -2,52 +2,62 @@ syntax = "proto3";
 
 package strat_game.common_definitions;
 
-message CommonOrder {
-  string id = 1;
-  string name = 2;
-  CommonOrderProperties properties = 3;
-  CommonOrderNotes notes = 4;
-}
+import "common_definitions/common.proto";
+import "common_definitions/map_2d.proto";
 
-message CommonOrderProperties {
+message CommonOrderFields {
   optional uint64 time_issued = 1;
   optional uint64 time_received = 2;
-  string relay_officer = 3;
+  UnitId relay_officer = 3;
   optional uint64 duration = 4;
   optional uint64 return_by = 5;
-  repeated string target_units = 6;
+  repeated UnitId target_units = 6;
 }
 
-message CommonOrderNotes {
-  string time_issued = 1;
-  string time_received = 2;
-  string relay_officer = 3;
-  string duration = 4;
-  string return_by = 5;
-  string target_units = 6;
+message ScoutOrder {
+  CommonOrderFields common = 1;
+  Area area = 2;
 }
 
-message OrderDefinition {
-  string id = 1;
-  string alias = 2;
-  string name = 3;
-  string extends = 4;
-  OrderProperties properties = 5;
+message ObserveOrder {
+  CommonOrderFields common = 1;
+  Coordinates location = 2;
 }
 
-message OrderProperties {
-  string area = 1;
-  string location = 2;
-  repeated string route = 3;
-  string target_area = 4;
-  repeated string target_enemy_units = 5;
-  string building_type = 6;
-  string build_location = 7;
-  string order_to_relay = 8;
-  repeated string relay_target_units = 9;
+message PatrolOrder {
+  CommonOrderFields common = 1;
+  Route route = 2;
+}
+
+message SeekAndDestroyOrder {
+  CommonOrderFields common = 1;
+  Area target_area = 2;
+  repeated UnitId target_enemy_units = 3;
+}
+
+message BuildOrder {
+  CommonOrderFields common = 1;
+  BuildingType building_type = 2;
+  Coordinates build_location = 3;
+}
+
+message RelayOrder {
+  CommonOrderFields common = 1;
+  Order order_to_relay = 2;
+  repeated UnitId relay_target_units = 3;
+}
+
+message Order {
+  oneof order {
+    ScoutOrder scout = 1;
+    ObserveOrder observe = 2;
+    PatrolOrder patrol = 3;
+    SeekAndDestroyOrder seek_and_destroy = 4;
+    BuildOrder build = 5;
+    RelayOrder relay = 6;
+  }
 }
 
 message OrderIndex {
-  string common_order = 1;
-  repeated string orders = 2;
+  repeated string orders = 1;
 }

@@ -2,8 +2,10 @@ syntax = "proto3";
 
 package strat_game.common_definitions;
 
+import "common_definitions/common.proto";
+
 message BaseLayerDefinition {
-  string id = 1;
+  TerrainType terrain_type = 1;
   string name = 2;
   string color_id = 3;
   bool passable = 4;
@@ -12,7 +14,7 @@ message BaseLayerDefinition {
 }
 
 message BaseLayerIndex {
-  repeated string base_layers = 1;
+  repeated TerrainType base_layers = 1;
 }
 
 message TileGenerationIndex {
@@ -23,9 +25,15 @@ message BaseLayerTransitionProbabilities {
   string id = 1;
   string name = 2;
   string description = 3;
-  map<string, BaseLayerTransitionRow> probabilities = 4;
+  repeated BaseLayerTransitionRow probabilities = 4;
 }
 
 message BaseLayerTransitionRow {
-  map<string, double> probabilities = 1;
+  TerrainType current_terrain_type = 1;
+  repeated BaseLayerTransitionProbability next_terrain_probabilities = 2;
+}
+
+message BaseLayerTransitionProbability {
+  TerrainType terrain_type = 1;
+  double probability = 2;
 }
