@@ -1,0 +1,8 @@
+{
+  "id": "water",
+  "name": "Water",
+  "colorId": "terrain.water",
+  "passable": false,
+  "movementCost": null,
+  "notes": "Impassable for normal land units."
+}

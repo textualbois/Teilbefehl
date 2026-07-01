@@ -1,0 +1,18 @@
+{
+  "id": "tile",
+  "name": "2D Map Tile",
+  "properties": {
+    "coordinates": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "baseLayerId": null,
+    "depth": null
+  },
+  "notes": {
+    "coordinates": "x and y are the 2D map position. z is height/elevation.",
+    "baseLayerId": "References one of the base_layer ids, like grass, dirt, mud, water, or sand.",
+    "depth": "Mostly for water bodies. Leave null until water depth rules are decided."
+  }
+}

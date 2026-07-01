@@ -1,0 +1,8 @@
+{
+  "id": "dirt",
+  "name": "Dirt",
+  "colorId": "terrain.dirt",
+  "passable": true,
+  "movementCost": 1,
+  "notes": "Dry bare ground."
+}

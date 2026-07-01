@@ -1,0 +1,24 @@
+{
+  "colors": {
+    "terrain.grass": {
+      "name": "Terrain Grass",
+      "hex": "#4f9f4a"
+    },
+    "terrain.dirt": {
+      "name": "Terrain Dirt",
+      "hex": "#8a6846"
+    },
+    "terrain.mud": {
+      "name": "Terrain Mud",
+      "hex": "#5f4a36"
+    },
+    "terrain.water": {
+      "name": "Terrain Water",
+      "hex": "#2f7fb8"
+    },
+    "terrain.sand": {
+      "name": "Terrain Sand",
+      "hex": "#d7bf72"
+    }
+  }
+}

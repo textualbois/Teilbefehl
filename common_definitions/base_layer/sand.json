@@ -1,0 +1,8 @@
+{
+  "id": "sand",
+  "name": "Sand",
+  "colorId": "terrain.sand",
+  "passable": true,
+  "movementCost": 2,
+  "notes": "Dry loose terrain that slows movement."
+}

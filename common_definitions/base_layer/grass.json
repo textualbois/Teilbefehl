@@ -1,0 +1,8 @@
+{
+  "id": "grass",
+  "name": "Grass",
+  "colorId": "terrain.grass",
+  "passable": true,
+  "movementCost": 1,
+  "notes": "Default comfortable land terrain."
+}

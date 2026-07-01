@@ -1,0 +1,8 @@
+{
+  "id": "mud",
+  "name": "Mud",
+  "colorId": "terrain.mud",
+  "passable": true,
+  "movementCost": 2,
+  "notes": "Wet ground that slows movement."
+}

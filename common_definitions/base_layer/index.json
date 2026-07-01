@@ -1,0 +1,9 @@
+{
+  "baseLayers": [
+    "grass.json",
+    "dirt.json",
+    "mud.json",
+    "water.json",
+    "sand.json"
+  ]
+}
