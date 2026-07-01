@@ -1,0 +1,38 @@
+.lobby-form {
+  display: grid;
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.lobby-field {
+  display: grid;
+  gap: 8px;
+}
+
+.lobby-field label {
+  color: #f4efe2;
+  font-weight: 700;
+}
+
+.lobby-field input,
+.lobby-field select {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid rgba(244, 239, 226, 0.22);
+  border-radius: 6px;
+  padding: 0 12px;
+  color: #f4efe2;
+  background: rgba(244, 239, 226, 0.08);
+}
+
+.lobby-field select option {
+  color: #111916;
+}
+
+.lobby-summary {
+  margin-top: 24px;
+  padding: 16px;
+  border-radius: 6px;
+  background: rgba(244, 239, 226, 0.08);
+  color: #c9d0c5;
+}
