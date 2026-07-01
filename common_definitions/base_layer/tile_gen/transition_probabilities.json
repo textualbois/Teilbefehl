@@ -1,0 +1,42 @@
+{
+  "id": "base_layer_transition_probabilities",
+  "name": "Base Layer Transition Probabilities",
+  "description": "Basic probability for the next tile base layer based on the current tile base layer.",
+  "probabilities": {
+    "grass": {
+      "grass": 0.55,
+      "dirt": 0.2,
+      "mud": 0.1,
+      "water": 0.05,
+      "sand": 0.1
+    },
+    "dirt": {
+      "grass": 0.2,
+      "dirt": 0.45,
+      "mud": 0.1,
+      "water": 0.05,
+      "sand": 0.2
+    },
+    "mud": {
+      "grass": 0.15,
+      "dirt": 0.1,
+      "mud": 0.45,
+      "water": 0.25,
+      "sand": 0.05
+    },
+    "water": {
+      "grass": 0.05,
+      "dirt": 0.05,
+      "mud": 0.25,
+      "water": 0.6,
+      "sand": 0.05
+    },
+    "sand": {
+      "grass": 0.1,
+      "dirt": 0.2,
+      "mud": 0.05,
+      "water": 0.1,
+      "sand": 0.55
+    }
+  }
+}
