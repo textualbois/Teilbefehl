@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Armory">
+  <rect width="64" height="64" rx="8" fill="#263238"/>
+  <path d="M18 50V24l14-10 14 10v26H18Z" fill="#795548"/>
+  <path d="M24 50V30h16v20" fill="#4e342e"/>
+  <path d="M22 26h20" stroke="#f0c15a" stroke-width="4" stroke-linecap="round"/>
+  <path d="M20 14 44 50M44 14 20 50" stroke="#cfd8dc" stroke-width="4" stroke-linecap="round"/>
+</svg>

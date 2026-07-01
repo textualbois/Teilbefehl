@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Base Camp">
+  <rect width="64" height="64" rx="8" fill="#263238"/>
+  <path d="M12 48h40L42 24H22L12 48Z" fill="#d9a441"/>
+  <path d="M22 24 32 12l10 12H22Z" fill="#f0c15a"/>
+  <path d="M28 48V34h8v14" fill="#5d4037"/>
+  <path d="M18 48h28" stroke="#fff3c4" stroke-width="3" stroke-linecap="round"/>
+</svg>

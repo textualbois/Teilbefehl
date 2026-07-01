@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Townhall">
+  <rect width="64" height="64" rx="8" fill="#263238"/>
+  <path d="M14 50V28h36v22H14Z" fill="#b0bec5"/>
+  <path d="M20 28V18h24v10" fill="#78909c"/>
+  <path d="M17 18h30l-15-8-15 8Z" fill="#f0c15a"/>
+  <path d="M28 50V38h8v12" fill="#455a64"/>
+  <path d="M20 34h6M38 34h6" stroke="#eceff1" stroke-width="3" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Watch Tower">
+  <rect width="64" height="64" rx="8" fill="#263238"/>
+  <path d="M22 52h20l-4-32H26l-4 32Z" fill="#8d6e63"/>
+  <path d="M18 20h28v10H18V20Z" fill="#c79a55"/>
+  <path d="M22 14h20l4 6H18l4-6Z" fill="#f0c15a"/>
+  <path d="M27 52 37 20M37 52 27 20" stroke="#4e342e" stroke-width="3"/>
+</svg>
