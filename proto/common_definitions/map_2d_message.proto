@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package strat_game.common_definitions;
+
+import "common_definitions/map_2d.proto";
+
+message MapDimensions {
+  uint32 width = 1;
+  uint32 height = 2;
+}
+
+message MapCreateRequest {
+  MapDimensions map_dimensions = 1;
+  optional string seed = 2;
+}
+
+message MapCreateResponse {
+  MapDimensions map_dimensions = 1;
+  string seed = 2;
+  repeated TileDefinition tiles = 3;
+}

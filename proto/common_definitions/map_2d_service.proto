@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package strat_game.common_definitions;
+
+import "common_definitions/map_2d_message.proto";
+
+service Map2DService {
+  rpc CreateMap(MapCreateRequest) returns (MapCreateResponse); // returns the full map. later we may need to return part of a map. for example with fog of war anti-cheat style or for generating on the go
+}
