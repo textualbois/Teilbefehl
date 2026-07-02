@@ -1,8 +1,5 @@
-import { renderLobbyPage } from "../lobby/lobby-page";
 import { createElement } from "../../ui/dom";
 import "./start-page.css";
-
-type Page = "start" | "lobby";
 
 type ButtonVariant = "primary" | "secondary";
 
@@ -20,35 +17,15 @@ type PanelConfig = {
   buttons: ButtonConfig[];
 };
 
-const appRoot = document.querySelector<HTMLElement>("#app");
+type StartPageOptions = {
+  onCreateLobby: () => void;
+};
 
-if (!appRoot) {
-  throw new Error("App root not found.");
+export function renderStartPage(options: StartPageOptions): HTMLElement {
+  return renderStartPanel(getStartPanelConfig(options));
 }
 
-const app = appRoot;
-
-let currentPage: Page = "start";
-
-function render(): void {
-  if (currentPage === "lobby") {
-    app.replaceChildren(
-      renderShell(
-        renderLobbyPage({
-          onBack: () => {
-            currentPage = "start";
-            render();
-          },
-        }),
-      ),
-    );
-    return;
-  }
-
-  app.replaceChildren(renderShell(renderStartPanel()));
-}
-
-function getStartPanelConfig(): PanelConfig {
+function getStartPanelConfig(options: StartPageOptions): PanelConfig {
   return {
     eyebrow: "Command Room",
     title: "Strategy Game",
@@ -58,23 +35,13 @@ function getStartPanelConfig(): PanelConfig {
     buttons: [
       {
         label: "Create Lobby",
-        action: () => {
-          currentPage = "lobby";
-          render();
-        },
+        action: options.onCreateLobby,
       },
     ],
   };
 }
 
-function renderShell(content: HTMLElement): HTMLElement {
-  const shell = createElement("section", { className: "shell" });
-  shell.append(content);
-  return shell;
-}
-
-function renderStartPanel(): HTMLElement {
-  const config = getStartPanelConfig();
+function renderStartPanel(config: PanelConfig): HTMLElement {
   const panel = createElement("div", { className: "panel" });
 
   panel.append(createElement("p", { className: "eyebrow", text: config.eyebrow }));
@@ -105,5 +72,3 @@ function renderActions(buttons: ButtonConfig[]): HTMLElement {
 
   return actions;
 }
-
-render();

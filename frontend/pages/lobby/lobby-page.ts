@@ -1,43 +1,59 @@
+import {
+  createMap2DProtoApi,
+  createMapCreateRequest,
+  type MapCreateResponseMessage,
+} from "../../api/proto";
 import { createElement } from "../../ui/dom";
 import "./lobby-page.css";
 
 type SelectOption = {
   label: string;
   value: string;
+  width: number;
+  height: number;
 };
 
 type LobbyPageOptions = {
   onBack: () => void;
+  onMapCreated: (map: MapCreateResponseMessage) => void;
 };
 
 const mapSizeOptions: SelectOption[] = [
-  { label: "Small - 32 x 32", value: "small" },
-  { label: "Medium - 64 x 64", value: "medium" },
-  { label: "Large - 128 x 128", value: "large" },
+  { label: "Small - 128 x 128", value: "small", width: 128, height: 128 },
+  { label: "Medium - 256 x 256", value: "medium", width: 256, height: 256 },
+  { label: "Large - 512 x 512", value: "large", width: 512, height: 512 },
 ];
+
+const mapApi = createMap2DProtoApi();
 
 export function renderLobbyPage(options: LobbyPageOptions): HTMLElement {
   const panel = createElement("div", { className: "panel" });
 
   panel.append(createElement("p", { className: "eyebrow", text: "New Lobby" }));
   panel.append(createElement("h2", { text: "Create Lobby" }));
-  panel.append(renderLobbyForm());
+  const form = renderLobbyForm(options);
+
+  panel.append(form);
   panel.append(
     createElement("div", {
       className: "lobby-summary",
       text: "Lobby setup only for now. Backend wiring can come after the map exists.",
     }),
   );
-  panel.append(renderActions(options));
 
   return panel;
 }
 
-function renderLobbyForm(): HTMLFormElement {
+function renderLobbyForm(options: LobbyPageOptions): HTMLFormElement {
   const form = createElement("form", { className: "lobby-form" }) as HTMLFormElement;
 
   form.append(renderSeedField());
   form.append(renderMapSizeField());
+  form.append(renderActions(options));
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    void createMapFromForm(form, options);
+  });
 
   return form;
 }
@@ -78,14 +94,43 @@ function renderMapSizeField(): HTMLElement {
 
 function renderActions(options: LobbyPageOptions): HTMLElement {
   const actions = createElement("div", { className: "actions" });
+  const createButton = createElement("button", {
+    className: "button",
+    text: "Generate Map",
+  }) as HTMLButtonElement;
   const backButton = createElement("button", {
     className: "button secondary",
     text: "Back",
   }) as HTMLButtonElement;
 
+  createButton.type = "submit";
   backButton.type = "button";
   backButton.addEventListener("click", options.onBack);
 
-  actions.append(backButton);
+  actions.append(createButton, backButton);
   return actions;
+}
+
+async function createMapFromForm(
+  form: HTMLFormElement,
+  options: LobbyPageOptions,
+): Promise<void> {
+  const formData = new FormData(form);
+  const seed = String(formData.get("game-seed") ?? "");
+  const mapSize = getMapSize(String(formData.get("map-size") ?? "medium"));
+  const request = createMapCreateRequest({
+    width: mapSize.width,
+    height: mapSize.height,
+    seed,
+  });
+  const response = await mapApi.createMap(request);
+
+  options.onMapCreated(response);
+}
+
+function getMapSize(value: string): SelectOption {
+  return (
+    mapSizeOptions.find((optionConfig) => optionConfig.value === value) ??
+    mapSizeOptions[1]
+  );
 }
