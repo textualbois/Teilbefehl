@@ -2,6 +2,7 @@ import { generateMap } from "../../game/map/generate-map";
 import {
   MapCreateRequest,
   MapDimensions,
+  MapGenerationStrategy,
 } from "../../game/generated/proto/common_definitions/map_2d_message";
 import type {
   MapCreateRequest as MapCreateRequestMessage,
@@ -9,11 +10,13 @@ import type {
 } from "../../game/generated/proto/common_definitions/map_2d_message";
 
 export type { MapCreateRequestMessage, MapCreateResponseMessage };
+export { MapGenerationStrategy };
 
 export type MapCreateOptions = {
   width: number;
   height: number;
   seed?: string;
+  generationStrategy?: MapGenerationStrategy;
 };
 
 export type Map2DProtoApi = {
@@ -27,6 +30,8 @@ export function createMapCreateRequest(options: MapCreateOptions): MapCreateRequ
       height: options.height,
     }),
     seed: options.seed,
+    generationStrategy:
+      options.generationStrategy ?? MapGenerationStrategy.BLENDED_NEIGHBOR_WEIGHTS,
   });
 }
 

@@ -9,9 +9,16 @@ message MapDimensions {
   uint32 height = 2;
 }
 
+enum MapGenerationStrategy {
+  MAP_GENERATION_STRATEGY_UNSPECIFIED = 0;
+  MAP_GENERATION_STRATEGY_WEIGHTED_NEIGHBOR_VOTE = 1;
+  MAP_GENERATION_STRATEGY_BLENDED_NEIGHBOR_WEIGHTS = 2;
+}
+
 message MapCreateRequest {
   MapDimensions map_dimensions = 1;
   optional string seed = 2;
+  MapGenerationStrategy generation_strategy = 3;
 }
 
 message MapCreateResponse {

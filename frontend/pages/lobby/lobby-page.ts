@@ -1,16 +1,23 @@
 import {
   createMap2DProtoApi,
   createMapCreateRequest,
+  MapGenerationStrategy,
   type MapCreateResponseMessage,
 } from "../../api/proto";
 import { createElement } from "../../ui/dom";
 import "./lobby-page.css";
 
-type SelectOption = {
+type MapSizeOption = {
   label: string;
   value: string;
   width: number;
   height: number;
+};
+
+type GenerationStrategyOption = {
+  label: string;
+  value: string;
+  strategy: MapGenerationStrategy;
 };
 
 type LobbyPageOptions = {
@@ -18,10 +25,23 @@ type LobbyPageOptions = {
   onMapCreated: (map: MapCreateResponseMessage) => void;
 };
 
-const mapSizeOptions: SelectOption[] = [
+const mapSizeOptions: MapSizeOption[] = [
   { label: "Small - 128 x 128", value: "small", width: 128, height: 128 },
   { label: "Medium - 256 x 256", value: "medium", width: 256, height: 256 },
   { label: "Large - 512 x 512", value: "large", width: 512, height: 512 },
+];
+
+const generationStrategyOptions: GenerationStrategyOption[] = [
+  {
+    label: "Blended Neighbor Weights",
+    value: "blended-neighbor-weights",
+    strategy: MapGenerationStrategy.BLENDED_NEIGHBOR_WEIGHTS,
+  },
+  {
+    label: "Weighted Neighbor Vote",
+    value: "weighted-neighbor-vote",
+    strategy: MapGenerationStrategy.WEIGHTED_NEIGHBOR_VOTE,
+  },
 ];
 
 const mapApi = createMap2DProtoApi();
@@ -49,6 +69,7 @@ function renderLobbyForm(options: LobbyPageOptions): HTMLFormElement {
 
   form.append(renderSeedField());
   form.append(renderMapSizeField());
+  form.append(renderGenerationStrategyField());
   form.append(renderActions(options));
   form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -56,6 +77,26 @@ function renderLobbyForm(options: LobbyPageOptions): HTMLFormElement {
   });
 
   return form;
+}
+
+function renderGenerationStrategyField(): HTMLElement {
+  const wrapper = createElement("div", { className: "lobby-field" });
+  const label = createElement("label", { text: "Generation Method" }) as HTMLLabelElement;
+  const select = createElement("select") as HTMLSelectElement;
+
+  label.htmlFor = "generation-strategy";
+  select.id = "generation-strategy";
+  select.name = "generation-strategy";
+
+  for (const optionConfig of generationStrategyOptions) {
+    const option = createElement("option", { text: optionConfig.label }) as HTMLOptionElement;
+    option.value = optionConfig.value;
+    option.selected = optionConfig.strategy === MapGenerationStrategy.BLENDED_NEIGHBOR_WEIGHTS;
+    select.append(option);
+  }
+
+  wrapper.append(label, select);
+  return wrapper;
 }
 
 function renderSeedField(): HTMLElement {
@@ -118,19 +159,30 @@ async function createMapFromForm(
   const formData = new FormData(form);
   const seed = String(formData.get("game-seed") ?? "");
   const mapSize = getMapSize(String(formData.get("map-size") ?? "medium"));
+  const generationStrategy = getGenerationStrategy(
+    String(formData.get("generation-strategy") ?? "blended-neighbor-weights"),
+  );
   const request = createMapCreateRequest({
     width: mapSize.width,
     height: mapSize.height,
     seed,
+    generationStrategy: generationStrategy.strategy,
   });
   const response = await mapApi.createMap(request);
 
   options.onMapCreated(response);
 }
 
-function getMapSize(value: string): SelectOption {
+function getMapSize(value: string): MapSizeOption {
   return (
     mapSizeOptions.find((optionConfig) => optionConfig.value === value) ??
     mapSizeOptions[1]
+  );
+}
+
+function getGenerationStrategy(value: string): GenerationStrategyOption {
+  return (
+    generationStrategyOptions.find((optionConfig) => optionConfig.value === value) ??
+    generationStrategyOptions[0]
   );
 }

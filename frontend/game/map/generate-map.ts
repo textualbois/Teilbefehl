@@ -5,6 +5,7 @@ import {
   TileProperties,
 } from "../generated/proto/common_definitions/map_2d";
 import {
+  MapGenerationStrategy,
   MapCreateResponse,
   MapDimensions,
 } from "../generated/proto/common_definitions/map_2d_message";
@@ -47,6 +48,10 @@ export function generateMap(request: MapCreateRequest): MapCreateResponseMessage
   const width = request.mapDimensions?.width ?? 0;
   const height = request.mapDimensions?.height ?? 0;
   const seed = request.seed?.trim() || "default-map";
+  const strategy =
+    request.generationStrategy === MapGenerationStrategy.UNSPECIFIED
+      ? MapGenerationStrategy.BLENDED_NEIGHBOR_WEIGHTS
+      : request.generationStrategy;
   const random = createSeededRandom(seed);
   const terrainGrid: TerrainKey[][] = [];
   const tiles: TileDefinition[] = [];
@@ -55,7 +60,7 @@ export function generateMap(request: MapCreateRequest): MapCreateResponseMessage
     terrainGrid[y] = [];
 
     for (let x = 0; x < width; x++) {
-      const terrainKey = chooseTerrainForTile(x, y, terrainGrid, random);
+      const terrainKey = chooseTerrainForTile(x, y, terrainGrid, random, strategy);
       terrainGrid[y][x] = terrainKey;
       tiles.push(createTile(x, y, terrainKey));
     }
@@ -73,27 +78,113 @@ function chooseTerrainForTile(
   y: number,
   terrainGrid: TerrainKey[][],
   random: () => number,
+  strategy: MapGenerationStrategy,
 ): TerrainKey {
   if (x === 0 && y === 0) {
     return "grass";
   }
 
-  const sourceTerrain = y > 0 ? terrainGrid[y - 1][x] : terrainGrid[y][x - 1];
-  return chooseWeightedTerrain(sourceTerrain, random());
+  const neighborTerrains = getKnownNeighborTerrains(x, y, terrainGrid);
+
+  if (neighborTerrains.length === 0) {
+    return "grass";
+  }
+
+  if (strategy === MapGenerationStrategy.WEIGHTED_NEIGHBOR_VOTE) {
+    return chooseByWeightedNeighborVote(neighborTerrains, random);
+  }
+
+  return chooseByBlendedNeighborWeights(neighborTerrains, random());
 }
 
 function chooseWeightedTerrain(sourceTerrain: TerrainKey, roll: number): TerrainKey {
   const probabilities = transitionProbabilities.probabilities[sourceTerrain];
+  return chooseFromWeights(probabilities, roll);
+}
+
+function chooseByWeightedNeighborVote(
+  neighborTerrains: TerrainKey[],
+  random: () => number,
+): TerrainKey {
+  const votes = createEmptyTerrainWeights();
+
+  for (const neighborTerrain of neighborTerrains) {
+    const vote = chooseWeightedTerrain(neighborTerrain, random());
+    votes[vote] += 1;
+  }
+
+  return chooseFromWeights(votes, random());
+}
+
+function chooseByBlendedNeighborWeights(
+  neighborTerrains: TerrainKey[],
+  roll: number,
+): TerrainKey {
+  const blendedWeights = createEmptyTerrainWeights();
+
+  for (const neighborTerrain of neighborTerrains) {
+    const probabilities = transitionProbabilities.probabilities[neighborTerrain];
+
+    for (const terrainKey of Object.keys(probabilities) as TerrainKey[]) {
+      blendedWeights[terrainKey] += probabilities[terrainKey];
+    }
+  }
+
+  return chooseFromWeights(blendedWeights, roll);
+}
+
+function chooseFromWeights(weights: Record<TerrainKey, number>, roll: number): TerrainKey {
+  const totalWeight = Object.values(weights).reduce(
+    (runningTotal, weight) => runningTotal + weight,
+    0,
+  );
+  const target = roll * totalWeight;
   let runningTotal = 0;
 
-  for (const terrainKey of Object.keys(probabilities) as TerrainKey[]) {
-    runningTotal += probabilities[terrainKey];
-    if (roll <= runningTotal) {
+  for (const terrainKey of Object.keys(weights) as TerrainKey[]) {
+    runningTotal += weights[terrainKey];
+    if (target <= runningTotal) {
       return terrainKey;
     }
   }
 
-  return sourceTerrain;
+  return "grass";
+}
+
+function getKnownNeighborTerrains(
+  x: number,
+  y: number,
+  terrainGrid: TerrainKey[][],
+): TerrainKey[] {
+  const neighbors: TerrainKey[] = [];
+
+  for (const offsetY of [-1, 0]) {
+    for (const offsetX of [-1, 0, 1]) {
+      if (offsetX === 0 && offsetY === 0) {
+        continue;
+      }
+
+      const neighborY = y + offsetY;
+      const neighborX = x + offsetX;
+      const terrain = terrainGrid[neighborY]?.[neighborX];
+
+      if (terrain) {
+        neighbors.push(terrain);
+      }
+    }
+  }
+
+  return neighbors;
+}
+
+function createEmptyTerrainWeights(): Record<TerrainKey, number> {
+  return {
+    grass: 0,
+    dirt: 0,
+    mud: 0,
+    water: 0,
+    sand: 0,
+  };
 }
 
 function createTile(x: number, y: number, terrainKey: TerrainKey): TileDefinition {
