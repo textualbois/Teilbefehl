@@ -4,11 +4,11 @@
   "description": "Basic probability for the next tile base layer based on the current tile base layer.",
   "probabilities": {
     "grass": {
-      "grass": 0.55,
-      "dirt": 0.2,
-      "mud": 0.1,
-      "water": 0.05,
-      "sand": 0.1
+      "grass": 0.90,
+      "dirt": 0.1,
+      "mud": 0.01,
+      "water": 0.025,
+      "sand": 0.025
     },
     "dirt": {
       "grass": 0.2,
@@ -25,11 +25,11 @@
       "sand": 0.05
     },
     "water": {
-      "grass": 0.05,
-      "dirt": 0.05,
-      "mud": 0.25,
+      "grass": 0.025,
+      "dirt": 0.025,
+      "mud": 0.125,
       "water": 0.6,
-      "sand": 0.05
+      "sand": 0.25
     },
     "sand": {
       "grass": 0.1,
