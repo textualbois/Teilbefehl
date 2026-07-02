@@ -8,8 +8,8 @@ PROTO_FILES := $(shell find $(PROTO_DIR) -name '*.proto')
 
 .PHONY: list help install proto-ts dev host build preview clean
 
-# shows all make commands with their comments.
-# run when you want to see what this Makefile can do.
+# -shows all make commands with their comments.
+# -run when you want to see what this Makefile can do.
 list:
 	@TERM_SIZE=$$( (stty size < /dev/tty) 2>/dev/null || true); \
 	TERM_WIDTH=$${TERM_SIZE##* }; \
