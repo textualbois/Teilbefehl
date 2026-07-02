@@ -1,0 +1,40 @@
+.map-render {
+  --map-width: 1;
+  display: grid;
+  grid-template-columns: repeat(var(--map-width), minmax(8px, 1fr));
+  width: min(100%, 760px);
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid rgba(244, 239, 226, 0.18);
+  border-radius: 6px;
+  background: rgba(244, 239, 226, 0.08);
+}
+
+.map-tile {
+  min-width: 0;
+  min-height: 0;
+}
+
+.terrain-unspecified {
+  background: #2b2f33;
+}
+
+.terrain-grass {
+  background: #4f9f4a;
+}
+
+.terrain-dirt {
+  background: #8c6840;
+}
+
+.terrain-mud {
+  background: #5a4b3b;
+}
+
+.terrain-water {
+  background: #2f7fb8;
+}
+
+.terrain-sand {
+  background: #d7bf72;
+}
