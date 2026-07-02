@@ -24,4 +24,5 @@ message Area {
 message Route {
   Coordinates start = 1;
   repeated Coordinates waypoints = 2;
+  Coordinates end = 3;
 }
