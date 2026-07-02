@@ -17,12 +17,6 @@ message TileProperties {
   optional double depth = 3;
 }
 
-message TileNotes {
-  string coordinates = 1;
-  string terrain_type = 2;
-  string depth = 3;
-}
-
 message Area {
   Coordinates center = 1;
   uint32 radius = 2;
