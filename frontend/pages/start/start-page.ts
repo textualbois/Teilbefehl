@@ -1,5 +1,5 @@
 import { renderLobbyPage } from "../lobby/lobby-page";
-import { createElement } from "../ui/dom";
+import { createElement } from "../../ui/dom";
 import "./start-page.css";
 
 type Page = "start" | "lobby";

@@ -1,4 +1,4 @@
-import { createElement } from "../ui/dom";
+import { createElement } from "../../ui/dom";
 import "./lobby-page.css";
 
 type SelectOption = {
